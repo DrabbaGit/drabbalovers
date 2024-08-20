@@ -1,0 +1,55 @@
+---
+const { galleryUrls, influencerUTM } = Astro.props;
+if (!galleryUrls || galleryUrls.length === 0) return null;
+const half = Math.ceil(galleryUrls.length / 2);
+const firstHalf = galleryUrls.slice(0, half);
+const secondHalf = galleryUrls.slice(half);
+---
+
+<div class="container mx-auto p-4">
+    <div class="grid grid-cols-2 gap-4">
+      {/* Primera columna */}
+      <div class="flex flex-col gap-4 first-column">
+        {firstHalf.map((url: any, index: any) => (
+          <a
+            target="_blank"
+            href={`https://drabbalovers.co/?utm=${influencerUTM}`}
+            class="gallery-link"
+          >
+            <img
+              src={url}
+              alt={`Gallery image ${index + 1}`}
+              class="w-full h-full object-cover rounded-xl shadow-md"
+            />
+          </a>
+        ))}
+      </div>
+      {/* Segunda columna */}
+      <div class="flex flex-col gap-4">
+        {secondHalf.map((url: any, index: any) => (
+          <a
+            target="_blank"
+            href={`https://drabbalovers.co/?utm=${influencerUTM}`}
+            class="gallery-link"
+          >
+            <img
+              src={url}
+              alt={`Gallery image ${index + 1 + half}`}
+              class="w-full h-full object-cover rounded-xl shadow-md"
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+  
+  <style>
+      .gallery-link:hover {
+          transform: scale(1.02);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+  
+      .first-column {
+          margin-top: 60px;
+      }
+  </style>
